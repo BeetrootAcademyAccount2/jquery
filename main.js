@@ -11,6 +11,42 @@ let drinks = [
 //   });
 // });
 
+const exampleTarget = document.getElementById("example");
+
+const inputTarget = document.getElementById("randomInput");
+
+// console.log(exampleTarget.innerText);
+console.log(exampleTarget.textContent);
+
+inputTarget.addEventListener("keypress", (e) => {
+  const key = e.key;
+
+  const convertToCharCode = key.charCodeAt(0);
+
+  console.log(key);
+  console.log(convertToCharCode);
+});
+
+// document.addEventListener("keydown", (e) => {
+//   console.log(e);
+// });
+
+let keyPressed = {};
+
+document.addEventListener("keydown", (e) => {
+  console.log(e.key);
+  keyPressed[e.key] = true;
+
+  if (keyPressed["a"] && keyPressed["s"] && keyPressed["d"]) {
+    alert("Combination successful");
+    keyPressed = {};
+  }
+});
+
+document.addEventListener("keyup", (e) => {
+  keyPressed[e.key] = false;
+});
+
 $(() => {
   // drinks.forEach((value, i)=> console.log(i, value.name))
 
@@ -70,7 +106,22 @@ $(() => {
   });
 
   $("#btnSlideToggle").on("click", () => {
-    $("img").slideToggle(2000);
+    $("img").slideToggle({
+      duration: 5000,
+      easing: "linear",
+      start: () => {
+        console.log("Animation started");
+      },
+      progress: () => {
+        console.log("Animation in progress");
+      },
+      complete: () => {
+        console.log("Animation completed");
+      },
+      step: () => {
+        console.log("Animation step");
+      },
+    });
   });
 
   $("#btnFadeIn").on("click", () => {
